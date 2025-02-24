@@ -1,0 +1,6 @@
+data_input = int(input())
+fifth_number, rest = divmod(data_input, 10000)
+fourth_number, rest = divmod(rest, 1000)
+third_number, rest = divmod(rest, 100)
+second_number, first_number = divmod(rest, 10)
+print(first_number, second_number, third_number, fourth_number, fifth_number)
