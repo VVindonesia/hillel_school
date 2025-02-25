@@ -7,3 +7,4 @@ else:
     list_second_half = list1[1::2]
     print(list_first_half)
     print(list_second_half)
+  #оно, вроде, соотвествует поставленному заданию, но я могу переписать, если вы сочтете решение некорректным   
