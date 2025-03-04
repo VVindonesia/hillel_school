@@ -9,4 +9,4 @@ else:
     list_second_half = [list1[:list_first_half], list1[list_first_half:]]
     print(list_first_half)
     print(list_second_half)
-  #исправленный код, не обратил внимание на условия
+  #исправленный код
