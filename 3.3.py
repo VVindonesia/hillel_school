@@ -1,12 +1,12 @@
-list1 = [1, 2, 3]
+list1 = [5, 8, 9, 5, 4]
 if len(list1) == 0:
     print(list1)
     print(list1)
 else:
-    list_first_half = len(list1) //2
+    edited_list = len(list1) //2
     if len(list1) %2 != 0 :
-        list_first_half += 1
-    list_second_half = [list1[:list_first_half], list1[list_first_half:]]
-    print(list_first_half)
-    print(list_second_half)
+        edited_list += 1
+    result = [list1[:edited_list], list1[edited_list:]]
+
+    print(result)
   #исправленный код
