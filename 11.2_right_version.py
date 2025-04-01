@@ -1,9 +1,11 @@
 def generate_cube_numbers(end):
-    for num in range(2, end + 1):
+    num = 2
+    while True:
         cube = num ** 3
-        if cube <= end:
-            yield cube
-        else: break
+        if cube > end:
+            break
+        yield cube
+        num +=1
 print(list(generate_cube_numbers(1000)))
 
 
@@ -15,3 +17,4 @@ assert list(generate_cube_numbers(10)) == [8], 'оскільки воно мен
 assert list(generate_cube_numbers(100)) == [8, 27, 64], '5 у кубі це 125, а воно вже більше 100'
 assert list(generate_cube_numbers(1000)) == [8, 27, 64, 125, 216, 343, 512, 729, 1000]
 print("ok")
+
