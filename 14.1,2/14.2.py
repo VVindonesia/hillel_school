@@ -1,3 +1,6 @@
+from jinja2.filters import sync_do_unique
+
+
 class Human:
 
     def __init__(self, gender, age, first_name, last_name):
@@ -10,13 +13,24 @@ class Human:
         return f"{self.first_name} {self.last_name}, Age: {self.age}, Gender: {self.gender}"
 
 class Student(Human):
+    def __hash__(self):
+        return hash(str(self))
 
     def __init__(self, gender, age, first_name, last_name, record_book):
         super().__init__(gender,age, first_name, last_name)
         self.record_book = record_book
 
+    def __eq__(self, other):
+        if isinstance(other, Student):
+            return str(self) == str(other)
+        return False
+
     def __str__(self):
         return f"Student: {super().__str__()}, Record Book: {self.record_book}"
+
+class TooManyStudents(Exception):
+     def __init__(self, my_error):
+        self.my_error = my_error
 
 class Group:
 
@@ -25,7 +39,13 @@ class Group:
         self.group = set()
 
     def add_student(self, student):
+        if len(self.group) >= 10:
+            raise TooManyStudents("Too many students")
         self.group.add(student)
+
+
+
+
 
     def delete_student(self, last_name):
         student_to_delete = self.find_student(last_name)
@@ -46,14 +66,10 @@ class Group:
 st1 = Student('Male', 30, 'Steve', 'Jobs', 'AN142')
 st2 = Student('Female', 25, 'Liza', 'Taylor', 'AN145')
 gr = Group('PD1')
-gr.add_student(st1)
-gr.add_student(st2)
+for i in range(10):
+    gr.add_student(('Male', 1 + i, f'name{i}', f'lastname{i}', f'record_book{i}'))
 print(gr)
-assert str(gr.find_student('Jobs')) == str(st1), 'Test1'
-assert gr.find_student('Jobs2') is None, 'Test2'
-assert isinstance(gr.find_student('Jobs'), Student) is True, 'Метод поиска должен возвращать экземпляр'
-
-gr.delete_student('Taylor')
-print(gr)  # Only one student
-
-gr.delete_student('Taylor')  # No error!
+try:
+    gr.add_student(st1)
+except TooManyStudents as e:
+    print(e)
