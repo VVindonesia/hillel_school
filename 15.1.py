@@ -1,6 +1,3 @@
-from functools import total_ordering
-
-
 class Rectangle:
 
     def __init__(self, width, height):
